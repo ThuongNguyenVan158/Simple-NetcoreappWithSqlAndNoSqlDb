@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  websitewithmogodb:
+    image: aspnetapp:latest
+    ports:
+      - 3000:80
+    depends_on:
+      - mongodb
+    networks:
+      - aspnetapp-networks
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+    networks:
+      - aspnetapp-networks
+  mongoui:
+    image: mongo-express:latest
+    container_name: mongodb-ui
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: rootpassword
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb
+    networks:
+      - aspnetapp-networks
+networks:
+  aspnetapp-networks:
+      driver: bridge
+volumes:
+  mongodb_data_container:

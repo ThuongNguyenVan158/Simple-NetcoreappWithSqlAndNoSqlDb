@@ -1,0 +1,4 @@
+//Connect Db local
+    // "DefaultConnection": "User ID=postgres;Password=thuong@123;Host=localhost;Port=5432;Database=PostgreSqlDemoDb;Pooling=true;"
+    //Connect Db container
+"DefaultConnection": "User ID=postgres;Password=changeme;Host=postgres;Port=5432;Database=EmployeeDb;Pooling=true;"
